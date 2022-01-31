@@ -2,6 +2,7 @@ package com.example.memoryv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView image4;
     private ImageView image5;
     private ImageView image6;
+    private List<String> toast_gg = null;
+    private Resources resources = null;
 
     private ImageView carte_prec = null;
     Integer[] tabCartes = {R.drawable.fraise, R.drawable.fraise, R.drawable.peche, R.drawable.peche, R.drawable.pasteque, R.drawable.pasteque};
@@ -40,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image4 = findViewById(R.id.image4);
         image5 = findViewById(R.id.image5);
         image6 = findViewById(R.id.image6);
+        toast_gg = new ArrayList<>(Arrays.asList(resources.getStringArray(R.array.toast_gg)));
         melangerCarte();
     }
 
@@ -54,10 +59,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image6.setOnClickListener(this);
     }
 
+    private int i=0;
     protected void paireCarte(ImageView img){
         img.setOnClickListener(null);
         carte_prec.setOnClickListener(null);
-        Toast.makeText(MainActivity.this, "Belle paire ! (👉ﾟヮﾟ)👉", Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this,toast_gg.get(i), Toast.LENGTH_LONG).show();
+        i += 1;
         carte_prec = null;
     }
     protected void resetCarte(ImageView img){

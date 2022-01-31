@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">MemoryV2</string>
+    <string name="app_name">Memory</string>
+
+    <array name="toast_gg">
+        <item name ="gg_1">Belle paire ! (👉ﾟヮﾟ)👉</item>
+        <item name ="gg_2">Plus qu'une paire ! (っ▀¯▀)つ</item>
+        <item name ="gg_3">Bravo champion ! ☜(⌒▽⌒)👉</item>
+    </array>
+
+
 </resources>
