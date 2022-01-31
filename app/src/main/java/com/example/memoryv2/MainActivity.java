@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image4 = findViewById(R.id.image4);
         image5 = findViewById(R.id.image5);
         image6 = findViewById(R.id.image6);
+        resources = getResources();
         toast_gg = new ArrayList<>(Arrays.asList(resources.getStringArray(R.array.toast_gg)));
         melangerCarte();
     }
