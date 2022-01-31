@@ -11,9 +11,12 @@
         android:theme="@style/Theme.MemoryV2">
         <activity
             android:name=".EndGame"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".Accueil"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

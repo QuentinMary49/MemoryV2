@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EndGame">
+    tools:context=".Accueil">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -16,29 +16,16 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ralph" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="78dp"
-            android:textAlignment="center" />
+            android:src="@drawable/mainimg" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleX="0.75"
-            android:text="@string/restart" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleX="0.50"
-            android:text="@string/accueil" />
+            android:text="@string/jouer" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

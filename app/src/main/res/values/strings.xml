@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Memory</string>
     <string name="restart">Rejouer</string>
+    <string name="accueil">Retour à l&#8217;accueil</string>
+    <string name="jouer">Jouer</string>
     <array name="toast_gg">
         <item name="gg_1">Belle paire ! (👉ﾟヮﾟ)👉</item>
         <item name="gg_2">Plus qu&#8217;une paire ! (‾◡◝)</item>

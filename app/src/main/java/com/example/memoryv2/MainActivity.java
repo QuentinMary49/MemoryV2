@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img.setImageResource(R.drawable.backcard);
                 carte_prec.setImageResource(R.drawable.backcard);
                 carte_prec = null;
-                Toast.makeText(MainActivity.this,toast_gg.get(i), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,toast_gg.get(3), Toast.LENGTH_SHORT).show();
             }
         }, 1000);
     }
