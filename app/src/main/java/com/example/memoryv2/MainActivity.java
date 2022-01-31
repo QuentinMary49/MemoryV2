@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.ContactsContract;
@@ -36,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private List<String> toast_gg = null;
     private Resources resources = null;
 
+    private MediaPlayer son_click;
+    private MediaPlayer son_paire_carte;
+    private MediaPlayer son_pas_paire_carte;
 
     private ImageView carte_prec = null;
     Integer[] tabFruits = {R.drawable.fraise, R.drawable.fraise, R.drawable.peche, R.drawable.peche, R.drawable.pasteque, R.drawable.pasteque};
@@ -66,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image4 = findViewById(R.id.image4);
         image5 = findViewById(R.id.image5);
         image6 = findViewById(R.id.image6);
+        son_click = MediaPlayer.create(this,R.raw.click);
+        son_paire_carte = MediaPlayer.create(this,R.raw.good_match);
+        son_pas_paire_carte= MediaPlayer.create(this,R.raw.wrong_match);
         resources = getResources();
         toast_gg = new ArrayList<>(Arrays.asList(resources.getStringArray(R.array.toast_gg)));
         choixTheme();
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Bitmap bimg1 = convCarteOctet(img1);
                 Bitmap bimg2 = convCarteOctet(carte_prec);
                 if(bimg1 == bimg2){
+                    son_paire_carte.start();
                     paireCarte(img1);
                     nbPaire += 1;
                     if (nbPaire == 3){
@@ -127,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
                 else{
+                    son_pas_paire_carte.start();
                     resetCarte(img1);
                 }
             }else{
@@ -173,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-
+        son_click.start();
         retournerCarte(v, id);
         verifCarte(v, id);
     }

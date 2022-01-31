@@ -3,6 +3,7 @@ package com.example.memoryv2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +16,8 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
     private Button boutonRejouer = null;
     private Button boutonAccueil = null;
 
+    private MediaPlayer son_victoire;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +25,13 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
         messageCoup = findViewById(R.id.textView);
         boutonRejouer = findViewById(R.id.button);
         boutonAccueil = findViewById(R.id.button2);
+        son_victoire = MediaPlayer.create(this, R.raw.finish);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        son_victoire.start();
         boutonRejouer.setOnClickListener(this);
         boutonAccueil.setOnClickListener(this);
         Intent intent = getIntent();
@@ -39,6 +44,7 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        son_victoire.stop();
         int id =  v.getId();
         if (id ==  R.id.button){
             Intent intent = new Intent(EndGame.this,MainActivity.class);
