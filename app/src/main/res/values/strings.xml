@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Memory</string>
-
+    <string name="restart">Rejouer</string>
     <array name="toast_gg">
-        <item name ="gg_1">Belle paire ! (👉ﾟヮﾟ)👉</item>
-        <item name ="gg_2">Plus qu&#8217;une paire ! (‾◡◝)</item>
-        <item name ="gg_3">Bravo champion ! 👌</item>
+        <item name="gg_1">Belle paire ! (👉ﾟヮﾟ)👉</item>
+        <item name="gg_2">Plus qu&#8217;une paire ! (‾◡◝)</item>
+        <item name="gg_3">Bravo champion ! 👌</item>
+        <item name="gg_4">Mauvaise pioche ! 😉</item>
     </array>
 
 

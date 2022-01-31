@@ -2,6 +2,7 @@ package com.example.memoryv2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView image4;
     private ImageView image5;
     private ImageView image6;
+
+    private int nbPaire = 0;
+    private int nbCoups = 0;
+
     private List<String> toast_gg = null;
     private Resources resources = null;
 
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void paireCarte(ImageView img){
         img.setOnClickListener(null);
         carte_prec.setOnClickListener(null);
-        Toast.makeText(MainActivity.this,toast_gg.get(i), Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this,toast_gg.get(i), Toast.LENGTH_SHORT).show();
         i += 1;
         carte_prec = null;
     }
@@ -75,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 img.setImageResource(R.drawable.backcard);
                 carte_prec.setImageResource(R.drawable.backcard);
                 carte_prec = null;
+                Toast.makeText(MainActivity.this,toast_gg.get(i), Toast.LENGTH_SHORT).show();
             }
         }, 1000);
     }
@@ -90,12 +96,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             carte_prec = v.findViewById(id);
         }
         else{
+            nbCoups += 1;
             ImageView img1 = v.findViewById(id);
             if(img1 != carte_prec){
                 Bitmap bimg1 = convCarteOctet(img1);
                 Bitmap bimg2 = convCarteOctet(carte_prec);
                 if(bimg1 == bimg2){
                     paireCarte(img1);
+                    nbPaire += 1;
+                    if (nbPaire == 3){
+                        finJeu();
+                    }
                 }
                 else{
                     resetCarte(img1);
@@ -105,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+
     }
     protected void retournerCarte(View v, int id){
         if(id == R.id.image1){
@@ -132,10 +144,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             imageVue.setImageResource(listeCartes.get(5));
         }
     }
+    protected void finJeu(){
+        Intent intent = new Intent(MainActivity.this,EndGame.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("nbCoups", nbCoups);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
+
         retournerCarte(v, id);
         verifCarte(v, id);
     }
