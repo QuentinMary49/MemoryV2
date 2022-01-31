@@ -4,10 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -19,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView image6;
 
     private ImageView carte_prec = null;
-
+    Integer[] tabCartes = {R.drawable.fraise, R.drawable.fraise, R.drawable.peche, R.drawable.peche, R.drawable.pasteque, R.drawable.pasteque};
+    private List<Integer> listeCartes = Arrays.asList(tabCartes);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image4 = findViewById(R.id.image4);
         image5 = findViewById(R.id.image5);
         image6 = findViewById(R.id.image6);
+        melangerCarte();
     }
 
     @Override
@@ -42,63 +52,83 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image4.setOnClickListener(this);
         image5.setOnClickListener(this);
         image6.setOnClickListener(this);
-
-
     }
-    /*public boolean est_retourne(){
 
-    }*/
-
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        if(id == R.id.image1){
-            ImageView imageVue = v.findViewById(id);
-            imageVue.setImageResource(R.drawable.fraise);
-        }
-        else if (id == R.id.image2){
-            ImageView imageVue = v.findViewById(id);
-            imageVue.setImageResource(R.drawable.peche);
-        }
-        else if (id == R.id.image3){
-            ImageView imageVue = v.findViewById(id);
-            imageVue.setImageResource(R.drawable.pasteque);
-        }
-        else if (id == R.id.image4){
-            ImageView imageVue = v.findViewById(id);
-            imageVue.setImageResource(R.drawable.peche);
-        }
-        else if (id == R.id.image5){
-            ImageView imageVue = v.findViewById(id);
-            imageVue.setImageResource(R.drawable.fraise);
-        }
-        else if (id == R.id.image6){
-            ImageView imageVue = v.findViewById(id);
-            imageVue.setImageResource(R.drawable.pasteque);
-        }
+    protected void paireCarte(ImageView img){
+        img.setOnClickListener(null);
+        carte_prec.setOnClickListener(null);
+        Toast.makeText(MainActivity.this, "Belle paire ! (👉ﾟヮﾟ)👉", Toast.LENGTH_LONG).show();
+        carte_prec = null;
+    }
+    protected void resetCarte(ImageView img){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                img.setImageResource(R.drawable.backcard);
+                carte_prec.setImageResource(R.drawable.backcard);
+                carte_prec = null;
+            }
+        }, 1000);
+    }
+    protected void melangerCarte(){
+        Collections.shuffle(listeCartes);
+    }
+    protected Bitmap convCarteOctet(ImageView img){
+        Bitmap b = ((BitmapDrawable) img.getDrawable()).getBitmap();
+        return b;
+    }
+    protected void verifCarte(View v, int id){
         if(carte_prec == null) {
             carte_prec = v.findViewById(id);
         }
         else{
             ImageView img1 = v.findViewById(id);
             if(img1 != carte_prec){
-                Bitmap bimg1 = ((BitmapDrawable) img1.getDrawable()).getBitmap();
-                Bitmap bimg2 = ((BitmapDrawable) carte_prec.getDrawable()).getBitmap();
+                Bitmap bimg1 = convCarteOctet(img1);
+                Bitmap bimg2 = convCarteOctet(carte_prec);
                 if(bimg1 == bimg2){
-                    Toast.makeText(MainActivity.this, "C'est gagné", Toast.LENGTH_LONG).show();
-                    carte_prec = null;
+                    paireCarte(img1);
                 }
                 else{
-                    img1.setImageResource(R.drawable.backcard);
-                    carte_prec.setImageResource(R.drawable.backcard);
-                    carte_prec = null;
+                    resetCarte(img1);
                 }
             }else{
-                img1.setImageResource(R.drawable.backcard);
-                carte_prec.setImageResource(R.drawable.backcard);
-                carte_prec = null;
+                resetCarte(img1);
             }
 
         }
+    }
+    protected void retournerCarte(View v, int id){
+        if(id == R.id.image1){
+            ImageView imageVue = v.findViewById(id);
+            imageVue.setImageResource(listeCartes.get(0));
+        }
+        else if (id == R.id.image2){
+            ImageView imageVue = v.findViewById(id);
+            imageVue.setImageResource(listeCartes.get(1));
+        }
+        else if (id == R.id.image3){
+            ImageView imageVue = v.findViewById(id);
+            imageVue.setImageResource(listeCartes.get(2));
+        }
+        else if (id == R.id.image4){
+            ImageView imageVue = v.findViewById(id);
+            imageVue.setImageResource(listeCartes.get(3));
+        }
+        else if (id == R.id.image5){
+            ImageView imageVue = v.findViewById(id);
+            imageVue.setImageResource(listeCartes.get(4));
+        }
+        else if (id == R.id.image6){
+            ImageView imageVue = v.findViewById(id);
+            imageVue.setImageResource(listeCartes.get(5));
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        retournerCarte(v, id);
+        verifCarte(v, id);
     }
 }
