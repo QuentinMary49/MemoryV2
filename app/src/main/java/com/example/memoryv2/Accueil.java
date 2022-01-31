@@ -9,19 +9,22 @@ import android.widget.Button;
 
 public class Accueil extends AppCompatActivity implements View.OnClickListener{
 
-    private Button boutonJouer = null;
+    private Button boutonFruits = null;
+    private Button boutonLegumes = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil);
-        boutonJouer = findViewById(R.id.button3);
+        boutonFruits = findViewById(R.id.button3);
+        boutonLegumes = findViewById(R.id.button4);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        boutonJouer.setOnClickListener(this);
+        boutonFruits.setOnClickListener(this);
+        boutonLegumes.setOnClickListener(this);
     }
 
     @Override
@@ -29,6 +32,16 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
         int id = v.getId();
         if (id ==  R.id.button3){
             Intent intent = new Intent(Accueil.this,MainActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("mode", 1);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else if (id ==  R.id.button4){
+            Intent intent = new Intent(Accueil.this,MainActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("mode", 2);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     }

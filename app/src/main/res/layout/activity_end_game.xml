@@ -17,28 +17,41 @@
 
         <ImageView
             android:id="@+id/imageView2"
+            android:paddingTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ralph" />
 
         <TextView
             android:id="@+id/textView"
+            android:paddingTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="78dp"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="25dp"/>
 
-        <Button
-            android:id="@+id/button"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleX="0.75"
-            android:text="@string/restart" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleX="0.50"
-            android:text="@string/accueil" />
+            <Button
+                android:id="@+id/button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleX="0.80"
+                android:scaleY="0.80"
+                android:text="@string/restart" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:scaleX="0.80"
+                android:scaleY="0.80"
+                android:text="@string/accueil" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

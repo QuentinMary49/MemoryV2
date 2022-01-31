@@ -31,13 +31,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private int nbPaire = 0;
     private int nbCoups = 0;
+    private int mode = 1;
 
     private List<String> toast_gg = null;
     private Resources resources = null;
 
+
     private ImageView carte_prec = null;
-    Integer[] tabCartes = {R.drawable.fraise, R.drawable.fraise, R.drawable.peche, R.drawable.peche, R.drawable.pasteque, R.drawable.pasteque};
-    private List<Integer> listeCartes = Arrays.asList(tabCartes);
+    Integer[] tabFruits = {R.drawable.fraise, R.drawable.fraise, R.drawable.peche, R.drawable.peche, R.drawable.pasteque, R.drawable.pasteque};
+    Integer[] tabLegumes = {R.drawable.aubergine, R.drawable.aubergine, R.drawable.concombre, R.drawable.concombre, R.drawable.oignon, R.drawable.oignon};
+    private List<Integer> listeCartes = null;
+
+    protected void choixTheme(){
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            mode = (int) bundle.getSerializable("mode");
+            if (mode == 1){
+                listeCartes = Arrays.asList(tabFruits);
+            }
+            else if (mode == 2){
+                listeCartes = Arrays.asList(tabLegumes);
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         image6 = findViewById(R.id.image6);
         resources = getResources();
         toast_gg = new ArrayList<>(Arrays.asList(resources.getStringArray(R.array.toast_gg)));
+        choixTheme();
         melangerCarte();
     }
 
