@@ -17,7 +17,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
 
     private MediaPlayer son_click;
     private MediaPlayer theme_jeu;
-    private int  statut_musique;
+    private int statut_musique = 0;
 
     Intent intent;
     Bundle bundle;
@@ -55,9 +55,9 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
         if (id ==  R.id.button3){
             son_click.start();
 
-
             //Choix du mode fruits
             bundle.putSerializable("mode", 1);
+            bundle.putSerializable("statut_musique",statut_musique);
             intent.putExtras(bundle);
             startActivity(intent);
         }
@@ -66,7 +66,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
 
             //Choix du mode légumes
             bundle.putSerializable("mode", 2);
-
+            bundle.putSerializable("statut_musique",statut_musique);
             intent.putExtras(bundle);
             startActivity(intent);
         }
@@ -74,17 +74,16 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
 
         if (checked == 1231){
             if(!theme_jeu.isPlaying()){
+                theme_jeu.setLooping(true);
                 theme_jeu.start();
             }
             statut_musique = 1;
-            bundle.putSerializable("statut_musique",statut_musique);
         }
         else{
             if(theme_jeu.isPlaying()){
                 theme_jeu.pause();
             }
             statut_musique = 0;
-            bundle.putSerializable("statut_musique",statut_musique);
         }
 
     }
