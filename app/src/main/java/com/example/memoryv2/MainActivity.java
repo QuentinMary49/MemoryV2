@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.provider.ContactsContract;
 import android.view.View;
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private List<String> toast_gg = null;
     private Resources resources = null;
+
+    private Toast mToastToShow;
 
     private MediaPlayer son_click;
     private MediaPlayer son_paire_carte;
@@ -91,21 +94,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private int i=0;
-    protected void paireCarte(ImageView img){
+    protected void paireCarte(View view, ImageView img){
         img.setOnClickListener(null);
         carte_prec.setOnClickListener(null);
-        Toast.makeText(MainActivity.this,toast_gg.get(i), Toast.LENGTH_SHORT).show();
+        showToast(view, toast_gg.get(i));
+        //Toast.makeText(MainActivity.this,toast_gg.get(i), Toast.LENGTH_SHORT).show();
         i += 1;
         carte_prec = null;
     }
-    protected void resetCarte(ImageView img){
+    protected void resetCarte(View view, ImageView img){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 img.setImageResource(R.drawable.backcard);
                 carte_prec.setImageResource(R.drawable.backcard);
                 carte_prec = null;
-                Toast.makeText(MainActivity.this,toast_gg.get(3), Toast.LENGTH_SHORT).show();
+                showToast(view, toast_gg.get(3));
+                son_pas_paire_carte.start();
+                //Toast.makeText(MainActivity.this,toast_gg.get(3), Toast.LENGTH_SHORT).show();
             }
         }, 1000);
     }
@@ -128,18 +134,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Bitmap bimg2 = convCarteOctet(carte_prec);
                 if(bimg1 == bimg2){
                     son_paire_carte.start();
-                    paireCarte(img1);
+                    paireCarte(v, img1);
                     nbPaire += 1;
                     if (nbPaire == 3){
                         finJeu();
                     }
                 }
                 else{
-                    son_pas_paire_carte.start();
-                    resetCarte(img1);
+                    resetCarte(v, img1);
                 }
             }else{
-                resetCarte(img1);
+                resetCarte(v, img1);
             }
 
         }
@@ -185,5 +190,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         son_click.start();
         retournerCarte(v, id);
         verifCarte(v, id);
+    }
+
+    public void showToast(View view, String str) {
+        // Set the toast and duration
+        int toastDurationInMilliSeconds = 750;
+        mToastToShow = Toast.makeText(MainActivity.this, str, Toast.LENGTH_LONG);
+
+        // Set the countdown to display the toast
+        CountDownTimer toastCountDown;
+        toastCountDown = new CountDownTimer(toastDurationInMilliSeconds, 1000 /*Tick duration*/) {
+            public void onTick(long millisUntilFinished) {
+                mToastToShow.show();
+            }
+
+            public void onFinish() {
+                mToastToShow.cancel();
+            }
+        };
+
+        // Show the toast and starts the countdown
+        mToastToShow.show();
+        toastCountDown.start();
     }
 }
