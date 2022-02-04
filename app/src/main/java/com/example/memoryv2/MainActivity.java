@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int nbPaire = 0;
     private int nbCoups = 0;
     private int mode = 1;
+    private int statut_musique;
 
     private List<String> toast_gg = null;
     private Resources resources = null;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             mode = (int) bundle.getSerializable("mode");
+            statut_musique = (int) bundle.getSerializable("statut_musique");
             if (mode == 1){
                 listeCartes = Arrays.asList(tabFruits);
             }
@@ -110,7 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 carte_prec.setImageResource(R.drawable.backcard);
                 carte_prec = null;
                 showToast(view, toast_gg.get(3));
-                son_pas_paire_carte.start();
+                if(statut_musique == 1){
+                    son_pas_paire_carte.start();
+                }
                 //Toast.makeText(MainActivity.this,toast_gg.get(3), Toast.LENGTH_SHORT).show();
             }
         }, 1000);
@@ -133,7 +137,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Bitmap bimg1 = convCarteOctet(img1);
                 Bitmap bimg2 = convCarteOctet(carte_prec);
                 if(bimg1 == bimg2){
-                    son_paire_carte.start();
+                    if(statut_musique == 1){
+                        son_paire_carte.start();
+                    }
                     paireCarte(v, img1);
                     nbPaire += 1;
                     if (nbPaire == 3){
@@ -180,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent(MainActivity.this,EndGame.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable("nbCoups", nbCoups);
+        bundle.putSerializable("statut_musique",statut_musique);
         intent.putExtras(bundle);
         startActivity(intent);
     }

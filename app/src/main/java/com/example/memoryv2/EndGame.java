@@ -15,6 +15,7 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
     private TextView messageCoup = null;
     private Button boutonRejouer = null;
     private Button boutonAccueil = null;
+    private int statut_musique;
 
     private MediaPlayer son_victoire;
 
@@ -31,14 +32,18 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        son_victoire.start();
         boutonRejouer.setOnClickListener(this);
         boutonAccueil.setOnClickListener(this);
         Intent intent = getIntent();
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             nbCoups = (int) bundle.getSerializable("nbCoups");
+            statut_musique = (int) bundle.getSerializable("statut_musique");
             messageCoup.setText("NOMBRE DE COUPS : "+nbCoups);
+            if(statut_musique == 1){
+                son_victoire.start();
+            }
+
         }
     }
 
