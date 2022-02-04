@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -46,8 +47,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MediaPlayer son_pas_paire_carte;
 
     private ImageView carte_prec = null;
-    Integer[] tabFruits = {R.drawable.fraise, R.drawable.fraise, R.drawable.peche, R.drawable.peche, R.drawable.pasteque, R.drawable.pasteque};
-    Integer[] tabLegumes = {R.drawable.aubergine, R.drawable.aubergine, R.drawable.concombre, R.drawable.concombre, R.drawable.oignon, R.drawable.oignon};
+    Integer[] tabFruits = {R.drawable.ananas, R.drawable.banane, R.drawable.cerise, R.drawable.citron, R.drawable.fraise, R.drawable.kiwi, R.drawable.mandarine, R.drawable.mangue, R.drawable.melon, R.drawable.myrtille, R.drawable.noixcoco, R.drawable.olive, R.drawable.pasteque, R.drawable.peche, R.drawable.poire, R.drawable.pomme, R.drawable.pommev, R.drawable.raisin, R.drawable.tomate};
+    Integer[] tabLegumes = {R.drawable.ail, R.drawable.aubergine, R.drawable.avocat, R.drawable.brocoli, R.drawable.cachuette, R.drawable.carotte, R.drawable.champignon, R.drawable.chataigne, R.drawable.concombre, R.drawable.mais, R.drawable.oignon, R.drawable.patate, R.drawable.piment, R.drawable.poivron, R.drawable.salade};
     private List<Integer> listeCartes = null;
 
     protected void choixTheme(){
@@ -55,12 +56,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (intent != null) {
             Bundle bundle = intent.getExtras();
             mode = (int) bundle.getSerializable("mode");
+            Integer[] tabTMP = new Integer[6];
             statut_musique = (int) bundle.getSerializable("statut_musique");
             if (mode == 1){
-                listeCartes = Arrays.asList(tabFruits);
+                for (int i = 0; i < tabTMP.length; i += 2){
+                    int random = new Random().nextInt(tabFruits.length);
+                    tabTMP[i] = tabFruits[random];
+                    tabTMP[i+1] = tabFruits[random];
+                }
+                listeCartes = Arrays.asList(tabTMP);
             }
             else if (mode == 2){
-                listeCartes = Arrays.asList(tabLegumes);
+                for (int i = 0; i < tabTMP.length; i += 2){
+                    int random = new Random().nextInt(tabLegumes.length);
+                    tabTMP[i] = tabLegumes[random];
+                    tabTMP[i+1] = tabLegumes[random];
+                }
+                listeCartes = Arrays.asList(tabTMP);
             }
         }
     }
