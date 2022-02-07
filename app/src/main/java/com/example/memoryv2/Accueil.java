@@ -4,15 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Switch;
+
+import java.net.URL;
 
 public class Accueil extends AppCompatActivity implements View.OnClickListener{
 
     private Button boutonFruits = null;
     private Button boutonLegumes = null;
+    private ImageView eseo;
     private Switch switchMusique = null;
 
     private MediaPlayer son_click;
@@ -20,6 +25,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
     private int statut_musique = 0;
 
     Intent intent;
+    Intent intent_eseo;
     Bundle bundle;
 
     @Override
@@ -28,11 +34,14 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_accueil);
         boutonFruits = findViewById(R.id.button3);
         boutonLegumes = findViewById(R.id.button4);
+        eseo = findViewById(R.id.eseo);
         switchMusique = findViewById(R.id.switch2);
         son_click = MediaPlayer.create(this,R.raw.click);
         theme_jeu = MediaPlayer.create(this,R.raw.crash_theme);
 
         intent = new Intent(Accueil.this,MainActivity.class);
+        intent_eseo = new Intent(android.content.Intent.ACTION_VIEW);
+
         bundle = new Bundle();
     }
 
@@ -41,6 +50,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
         super.onResume();
         boutonFruits.setOnClickListener(this);
         boutonLegumes.setOnClickListener(this);
+        eseo.setOnClickListener(this);
         switchMusique.setOnClickListener(this);
     }
 
@@ -48,6 +58,12 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
     public void onClick(View v) {
         int id = v.getId();
         int checked = 0;
+
+        if(id == R.id.eseo){
+            intent_eseo.setData(Uri.parse("https://www.eseo.fr"));
+            startActivity(intent_eseo);
+        }
+
         if (id == R.id.switch2) {
             checked = Boolean.hashCode(switchMusique.isChecked());
         }
