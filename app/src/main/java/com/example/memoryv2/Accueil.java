@@ -18,6 +18,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
     private Button boutonFruits = null;
     private Button boutonLegumes = null;
     private ImageView eseo;
+    private ImageView mainimg;
     private Switch switchMusique = null;
 
     private MediaPlayer son_click;
@@ -25,7 +26,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
     private int statut_musique = 0;
 
     Intent intent;
-    Intent intent_eseo;
+    Intent intent_web;
     Bundle bundle;
 
     @Override
@@ -35,12 +36,13 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
         boutonFruits = findViewById(R.id.button3);
         boutonLegumes = findViewById(R.id.button4);
         eseo = findViewById(R.id.eseo);
+        mainimg = findViewById(R.id.mainimg);
         switchMusique = findViewById(R.id.switch2);
         son_click = MediaPlayer.create(this,R.raw.click);
         theme_jeu = MediaPlayer.create(this,R.raw.crash_theme);
 
         intent = new Intent(Accueil.this,MainActivity.class);
-        intent_eseo = new Intent(android.content.Intent.ACTION_VIEW);
+        intent_web = new Intent(android.content.Intent.ACTION_VIEW);
 
         bundle = new Bundle();
     }
@@ -51,6 +53,7 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
         boutonFruits.setOnClickListener(this);
         boutonLegumes.setOnClickListener(this);
         eseo.setOnClickListener(this);
+        mainimg.setOnClickListener(this);
         switchMusique.setOnClickListener(this);
     }
 
@@ -60,8 +63,13 @@ public class Accueil extends AppCompatActivity implements View.OnClickListener{
         int checked = 0;
 
         if(id == R.id.eseo){
-            intent_eseo.setData(Uri.parse("https://www.eseo.fr"));
-            startActivity(intent_eseo);
+            intent_web.setData(Uri.parse("https://www.eseo.fr"));
+            startActivity(intent_web);
+        }
+
+        if(id == R.id.mainimg){
+            intent_web.setData(Uri.parse("https://github.com/QuentinMary49/MemoryV2/"));
+            startActivity(intent_web);
         }
 
         if (id == R.id.switch2) {

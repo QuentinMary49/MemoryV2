@@ -7,7 +7,7 @@
     <string name="leaderboard">Leaderboard</string>
     <string name="musique">Musique</string>
 
-    <string name="credits">B3 - S6 / Android\n\nDI GALLO Léopold\nMARY Quentin</string>
+    <string name="credits">B3 - S6 / Android\n\nDI GALLO Léopold\nMARY Quentin\n\nAmusez-vous à cliquer sur toutes les images ce cette app !</string>
 
     <array name="toast_gg">
         <item name="gg_1">Belle paire ! (👉ﾟヮﾟ)👉</item>

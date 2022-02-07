@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class EndGame extends AppCompatActivity implements View.OnClickListener {
@@ -15,7 +17,10 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
     private TextView messageCoup = null;
     private Button boutonRejouer = null;
     private Button boutonAccueil = null;
+    private ImageView ralph;
     private int statut_musique;
+
+    private Intent intent_web;
 
     private MediaPlayer son_victoire;
 
@@ -26,7 +31,9 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
         messageCoup = findViewById(R.id.textView);
         boutonRejouer = findViewById(R.id.button);
         boutonAccueil = findViewById(R.id.button2);
+        ralph = findViewById(R.id.ralph);
         son_victoire = MediaPlayer.create(this, R.raw.finish);
+
     }
 
     @Override
@@ -34,6 +41,7 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
         super.onResume();
         boutonRejouer.setOnClickListener(this);
         boutonAccueil.setOnClickListener(this);
+        ralph.setOnClickListener(this);
         Intent intent = getIntent();
         if (intent != null) {
             Bundle bundle = intent.getExtras();
@@ -58,6 +66,11 @@ public class EndGame extends AppCompatActivity implements View.OnClickListener {
         if (id ==  R.id.button2){
             Intent intent = new Intent(EndGame.this,Accueil.class);
             startActivity(intent);
+        }
+        if(id == R.id.ralph){
+            intent_web = new Intent(android.content.Intent.ACTION_VIEW);
+            intent_web.setData(Uri.parse("https://bit.ly/3smVzCz"));
+            startActivity(intent_web);
         }
     }
 }
